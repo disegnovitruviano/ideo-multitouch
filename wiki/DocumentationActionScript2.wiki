@@ -1,0 +1,115 @@
+#summary Multitouch Client API for ActionScript 2 Documentation
+
+= Introduction =
+
+The Multitouch Client API for ActionScript 2 includes support for extensible touch actions, arbitrarily sized displays, and a limitless number of active fingers. Software simulated touch events are also supported to allow for software to be tested and developed on computers lacking multitouch hardware. The Multitouch Client API is built in ActionScript 2 and communicates with the Multitouch Server via network socket connection.
+
+= Organization =
+
+The following diagram describes the organization of the Multitouch Client API. Receiving messages from either the server or the simulator, the finger manager is instructed to create, reposition, or destroy fingers, broadcasting these finger events as they occur to the touch manager. The touch manager translates the finger events into touch events, dispatched to any touchable MovieClips registered with the touch manager. Touch actions are simply a bundle of touch event handlers along with any methods that support the desired behavior; they are bound to the supplied MovieClip upon construction.
+
+http://sites.google.com/site/ideolabsdocumentation/images/multitouchflowdiagram.png
+
+= Touch Events =
+
+After informing the TouchManager that a particular MovieClip should be touchable `TouchManager.makeTouchable(myMovieClip);`, that MovieClip receives touch events. Touch events are used by assigning the following event handlers.
+
+{{{
+myMovieClip.onTouch = function(fingers)
+{
+  trace(fingers.length);
+};
+
+myMovieClip.onUntouch = function(fingers)
+{
+  trace(fingers.length);
+};
+}}}
+
+An array of fingers is passed to each touch event handler. The fingers array is numerically indexed and ordered from oldest to newest. The coordinates of a particular finger can be accessed directly by it's 'point' object `fingers[0].point.x` and `fingers[0].point.y`.
+
+= Class Listing =
+
+==Finger==
+
+Representation of finger data from a finger tracking subsystem.
+
+Methods
+  * `Finger.getID()`
+  * `Finger.getPosition()`
+
+Properties
+  * `Finger.id`
+  * `Finger.point.x`
+  * `Finger.point.y`
+
+==FingerManager==
+
+Interface for creating, removing, and managing a number of fingers.
+
+Constructor
+  * `FingerManager(fingerPrintsMovieClip)`
+
+Methods
+  * `FingerManager.getFinger(id)`
+  * `FingerManager.getFingers()`
+  * `FingerManager.showFingerPrints()`
+  * `FingerManager.hideFingerPrints()`
+  * `FingerManager.getFingerArea()`
+  * `FingerManager.setFingerArea(width, height)`
+
+==FingerSimulator==
+
+Simulation layer to enable multitouch interfaces to be developed using single touch systems via keyboard chording coupled with traditional mouse input. Creates and destroys unique fingerprints on key press and release, enables them to be repositioned via mouse.
+
+Constructor
+  * `FingerSimulator(FingerManager)`
+
+==FingerClient==
+The network client that parses a multitouch protocol messages from the server and triggers the appropriate finger events (create, destroy, and reposition). The protocol consists of finger creation, destruction, and repositioning messages.
+
+Constructor
+  * `FingerClient(FingerManager, serverAddress, networkPort)`
+
+Protocol Description
+  * Messages have basic form of `[c,r,d](finger id):(x position),(y position)`
+  * e.g. `c2:23,46` – creates finger with id:2 at x:23 and y:46
+  * e.g. `r2:56,89` – repositions finger with id:2 to x:56 and y:89 
+  * e.g. `d2` – destroys finger with id:2
+
+==TouchManager==
+A finger/object collision detector and event dispatcher that allows arbitrary objects (or movieclips in flash) to receive touch events.
+
+Constructor
+  * `TouchManager(FingerManager)`
+
+Methods
+  * `TouchManager.makeTouchable(Object)`
+  * `TouchManager.makeUntouchable(Object)`
+  * `TouchManager.isTouchable(Object)`
+  * `TouchManager.getTouchables()`
+
+Events
+  * `onTouch(arrayOfFingers)`
+  * `onUntouch(arrayOfFingers)`
+
+==TouchAction==
+Extensible abstract interface that allows for "canned" touch actions to be easily packaged and assigned to on-screen objects with a single line of code.
+
+Included TouchActions
+  * `OneFingerDragger(MovieClip, boundsObject, friction, easing)`
+  * `TwoFingerManipulator(MovieClip, boundsObject, centered, easing)`
+
+Bounds Object Properties
+  * `lockX` – disallows change of x position
+  * `lockY` – disallows change of y position
+  * `lockScale` – disallows change of scale
+  * `lockRotation` – disallows change of rotation
+  * `minX` – lower bound for x position
+  * `maxX` – upper bound for x position
+  * `minY` – lower bound for y position
+  * `maxY` – upper bound for y position
+  * `minScale` – lower bound for scale
+  * `maxScale` – upper bound for scale
+  * `minRotation` – lower bound for rotation
+  * `maxRotation` – upper bound for rotation
