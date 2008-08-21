@@ -34,11 +34,11 @@ An array of fingers is passed to each touch event handler. The fingers array is 
 
 Representation of finger data from a finger tracking subsystem.
 
-Methods
+*Methods*
   * `Finger.getID()`
   * `Finger.getPosition()`
 
-Properties
+*Properties*
   * `Finger.id`
   * `Finger.point.x`
   * `Finger.point.y`
@@ -47,10 +47,10 @@ Properties
 
 Interface for creating, removing, and managing a number of fingers.
 
-Constructor
+*Constructor*
   * `FingerManager(fingerPrintsMovieClip)`
 
-Methods
+*Methods*
   * `FingerManager.getFinger(id)`
   * `FingerManager.getFingers()`
   * `FingerManager.showFingerPrints()`
@@ -62,16 +62,16 @@ Methods
 
 Simulation layer to enable multitouch interfaces to be developed using single touch systems via keyboard chording coupled with traditional mouse input. Creates and destroys unique fingerprints on key press and release, enables them to be repositioned via mouse.
 
-Constructor
+*Constructor*
   * `FingerSimulator(FingerManager)`
 
 ==FingerClient==
 The network client that parses a multitouch protocol messages from the server and triggers the appropriate finger events (create, destroy, and reposition). The protocol consists of finger creation, destruction, and repositioning messages.
 
-Constructor
+*Constructor*
   * `FingerClient(FingerManager, serverAddress, networkPort)`
 
-Protocol Description
+*Protocol Description*
   * Messages have basic form of `[c,r,d](finger id):(x position),(y position)`
   * e.g. `c2:23,46` – creates finger with id:2 at x:23 and y:46
   * e.g. `r2:56,89` – repositions finger with id:2 to x:56 and y:89 
@@ -96,11 +96,11 @@ A finger/object collision detector and event dispatcher that allows arbitrary ob
 ==TouchAction==
 Extensible abstract interface that allows for "canned" touch actions to be easily packaged and assigned to on-screen objects with a single line of code.
 
-Included TouchActions
+*Included TouchActions*
   * `OneFingerDragger(MovieClip, boundsObject, friction, easing)`
   * `TwoFingerManipulator(MovieClip, boundsObject, centered, easing)`
 
-Bounds Object Properties
+*Bounds Object Properties*
   * `lockX` – disallows change of x position
   * `lockY` – disallows change of y position
   * `lockScale` – disallows change of scale
