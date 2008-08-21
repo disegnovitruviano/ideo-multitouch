@@ -15,12 +15,12 @@ This software interprets data from a webcam used in conjunction with an ftir scr
  * run the FTIR server (present mode not required)
  * minimize the FTIR server application and run Flash applications.
 
-= Operation =
-   * get web cam image
-   * perform background subtraction
-   * perform blob tracking
-   * map blob positions into calibrated space
-   * send touchEvents over socket
+= Processing Pipeline =
+   # get web cam image
+   # perform background subtraction
+   # perform blob tracking
+   # map blob positions into calibrated space
+   # send touchEvents over socket
 
 = Keyboard commands =
  * press 'c' to calibrate then touch each of the points as they pop up
