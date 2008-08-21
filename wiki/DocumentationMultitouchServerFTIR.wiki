@@ -1,13 +1,19 @@
-#summary One-sentence summary of this page.
+#summary Information on installation and use of the Multitouch FTIR Server.
 
 = Introduction =
 
- This software interprets data from a webcam used in conjunction with an ftir screen to generate multitouch events for the IDEO Flash multitouch API it also compensates for camera alignment, rotation and fisheye
+This software interprets data from a webcam used in conjunction with an ftir screen to generate multitouch events for the IDEO Flash multitouch API it also compensates for camera alignment, rotation and fisheye
 
 = Installation =
+ * download and install [http://www.processing.org processing]
+ * download and unzip [http://ideo-multitouch.googlecode.com/files/MultitouchServerFTIR.zip MultitouchServerFTIR] to your processing sketches folder
  * download and install [http://webcamxtra.sourceforge.net/download.shtml JMyron]
  * if you're running on an Intel mac, download and install this [http://www.jibberia.com/projects/ libJMyron.jnilib] compiled for intel Macs   
  * download and install [http://www.v3ga.net/processing/BlobDetection/index-page-download.html blobDetection]
+ * run the FTIR server in processing's "present mode"
+ * perform a calibration
+ * run the FTIR server (present mode not required)
+ * minimize the FTIR server application and run Flash applications.
 
 = Operation =
    * get web cam image
