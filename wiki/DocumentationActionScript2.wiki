@@ -80,16 +80,16 @@ Protocol Description
 ==TouchManager==
 A finger/object collision detector and event dispatcher that allows arbitrary objects (or movieclips in flash) to receive touch events.
 
-Constructor
+*Constructor*
   * `TouchManager(FingerManager)`
 
-Methods
+*Methods*
   * `TouchManager.makeTouchable(Object)`
   * `TouchManager.makeUntouchable(Object)`
   * `TouchManager.isTouchable(Object)`
   * `TouchManager.getTouchables()`
 
-Events
+*Events*
   * `onTouch(arrayOfFingers)`
   * `onUntouch(arrayOfFingers)`
 
