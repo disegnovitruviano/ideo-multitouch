@@ -5,9 +5,9 @@
  This software interprets data from a webcam used in conjunction with an ftir screen to generate multitouch events for the IDEO Flash multitouch API it also compensates for camera alignment, rotation and fisheye
 
  installation:
- download and install [http://webcamxtra.sourceforge.net/download.shtml JMyron]
- if you're running on an Intel mac, download and install this [http://www.jibberia.com/projects/ libJMyron.jnilib] compiled for intel Macs   
- download and install [http://www.v3ga.net/processing/BlobDetection/index-page-download.html blobDetection]
+ * download and install [http://webcamxtra.sourceforge.net/download.shtml JMyron]
+ * if you're running on an Intel mac, download and install this [http://www.jibberia.com/projects/ libJMyron.jnilib] compiled for intel Macs   
+ * download and install [http://www.v3ga.net/processing/BlobDetection/index-page-download.html blobDetection]
 
  operation:
    * get web cam image
@@ -16,14 +16,11 @@
    * map blob positions into calibrated space
    * send touchEvents over socket
 
- press 'c' to calibrate then touch each of the points as they pop up
- press 'd' to cycle through levels of graphical information
+ keystrokes:
+ * press 'c' to calibrate then touch each of the points as they pop up
+ * press 'd' to cycle through levels of graphical information
 
 
  PerpsectiveCorrection handles calibration
  [http://incubator.quasimondo.com fastblur] does a fast (approximate) blur on the image
  all other java files are matrix libraries used for calibration calculation.
-
-
-// Greets:
-// - Super Fast Blur v1.1 by Mario Klingemann <http://incubator.quasimondo.com>
