@@ -36,7 +36,7 @@ new TwoFingerManipulator(myMovieClip);
 
 =How to constrain touch actions=
 
-The following example builds on the previous example with constraints for the touch actions. Boundaries for position and scale are specified in this example.
+The following example builds on the previous example with constraints for the touch actions. Boundaries for position and scale are specified in this example. This example is also useful for squelching noise originating from the IR fringe of edge-illuminated FTIR surfaces since it disregards fingers outside of the designated finger area.
 
 {{{
 import com.ideo.MultiTouch.*;
