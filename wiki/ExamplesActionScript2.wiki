@@ -18,10 +18,10 @@ import com.ideo.MultiTouch.TouchActions.*;
 var fingerManager = new FingerManager(this);
 
 // connect finger manager to finger server
-new FingerClient(fingerManager, "localhost", 11000);
+var fingerClient = new FingerClient(fingerManager, "localhost", 11000);
 
 // create finger simulator
-new FingerSimulator(fingerManager);
+var fingerSimulator = new FingerSimulator(fingerManager);
 
 // create touch manager
 var touchManager = new TouchManager(fingerManager);
@@ -49,10 +49,10 @@ var fingerManager = new FingerManager(this);
 var fingerArea = fingerManager.getFingerArea();
 
 // connect finger manager to finger server
-new FingerClient(fingerManager, "localhost", 11000);
+var fingerClient = new FingerClient(fingerManager, "localhost", 11000);
 
 // create finger simulator
-new FingerSimulator(fingerManager);
+var fingerSimulator = new FingerSimulator(fingerManager);
 
 // create touch manager
 var touchManager = new TouchManager(fingerManager);
@@ -77,11 +77,11 @@ import com.ideo.MultiTouch.TouchActions.*;
 // create finger manager
 var fingerManager = new FingerManager(this);
 
-// connect to finger server
-new FingerClient(fingerManager, "localhost", 11000);
+// connect finger manager to finger server
+var fingerClient = new FingerClient(fingerManager, "localhost", 11000);
 
 // create finger simulator
-new FingerSimulator(fingerManager);
+var fingerSimulator = new FingerSimulator(fingerManager);
 
 // create touch manager
 var touchManager = new TouchManager(fingerManager);
