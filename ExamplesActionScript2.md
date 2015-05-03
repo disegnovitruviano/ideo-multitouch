@@ -1,0 +1,118 @@
+# Introduction #
+
+Here are some basic examples to get started using the Multitouch Package for Flash ActionScript 2. Keep in mind that multitouch hardware is not required for these examples. Touch events can be simulated in the Flash environment to allow multitouch software to be developed without or while away from multitouch hardware. Touch events are simulated by way of keyboard chording. The number keys (0,1,2,3 and 4) place virtual fingerprints on the stage that can be dragged with the mouse. These visible fingerprints are also useful for debugging multitouch hardware calibration and screen registration.
+
+![http://sites.google.com/site/ideolabsdocumentation/images/multitouchsimulator.png](http://sites.google.com/site/ideolabsdocumentation/images/multitouchsimulator.png)
+
+# How to use touch actions #
+
+The following example illustrates how to enable a movieclip to be dragged using one finger or dragged, scaled, and rotated using two fingers. The screenshot above displays this example code as applied to a colored square.
+
+```
+import com.ideo.MultiTouch.*;
+import com.ideo.MultiTouch.TouchActions.*;
+
+// create finger manager
+var fingerManager = new FingerManager(this);
+
+// connect finger manager to finger server
+var fingerClient = new FingerClient(fingerManager, "localhost", 11000);
+
+// create finger simulator
+var fingerSimulator = new FingerSimulator(fingerManager);
+
+// create touch manager
+var touchManager = new TouchManager(fingerManager);
+
+// make movieclip touchable
+touchManager.makeTouchable(myMovieClip);
+
+// assign touch actions for movieclip
+new OneFingerDragger(myMovieClip);
+new TwoFingerManipulator(myMovieClip);
+```
+
+# How to constrain touch actions #
+
+The following example builds on the previous example with constraints for the touch actions. Boundaries for position and scale are specified in this example. This example is also useful for squelching noise originating from the IR fringe of edge-illuminated FTIR surfaces since it disregards fingers outside of the designated finger area.
+
+```
+import com.ideo.MultiTouch.*;
+import com.ideo.MultiTouch.TouchActions.*;
+
+// create finger manager
+var fingerManager = new FingerManager(this);
+
+// record the area where fingers may exist
+var fingerArea = fingerManager.getFingerArea();
+
+// connect finger manager to finger server
+var fingerClient = new FingerClient(fingerManager, "localhost", 11000);
+
+// create finger simulator
+var fingerSimulator = new FingerSimulator(fingerManager);
+
+// create touch manager
+var touchManager = new TouchManager(fingerManager);
+
+// make movieclip touchable
+touchManager.makeTouchable(myMovieClip);
+
+// assign touch actions for movieclip
+var bounds = {minScale:20, maxScale:200, minX:0, minY:0, maxX:fingerArea.width, maxY:fingerArea.height};
+new OneFingerDragger(myMovieClip, bounds);
+new TwoFingerManipulator(myMovieClip, bounds);
+```
+
+# How to use touch event handlers #
+
+The following example illustrates how to assign touch event handlers to a movieclip. Touch event handlers have access to the finger coordinate data sent by the multitouch server.
+
+```
+import com.ideo.MultiTouch.*;
+import com.ideo.MultiTouch.TouchActions.*;
+
+// create finger manager
+var fingerManager = new FingerManager(this);
+
+// connect finger manager to finger server
+var fingerClient = new FingerClient(fingerManager, "localhost", 11000);
+
+// create finger simulator
+var fingerSimulator = new FingerSimulator(fingerManager);
+
+// create touch manager
+var touchManager = new TouchManager(fingerManager);
+
+// make movieclips touchable
+touchManager.makeTouchable(myMovieClip);
+
+// create touch event handlers for movieclip
+myMovieClip.onTouch = function(fingers)
+{
+  trace(fingers.length + " fingers are touching");
+  var newFinger = fingers[fingers.length - 1];
+  trace("The newest is at (" + newFinger.point.x + "," + newFinger.point.y + ")");
+};
+myMovieClip.onUntouch = function(fingers)
+{
+  trace(fingers.length + " fingers are touching");
+};
+```
+
+# How to hide fingerprints #
+
+The following example illustrates how hide the fingerprints to make for a more polished final application.
+
+```
+import com.ideo.MultiTouch.*;
+import com.ideo.MultiTouch.TouchActions.*;
+
+// create finger manager
+var fingerManager = new FingerManager(this);
+
+// hide the debug fingerprints
+fingerManager.hideFingerPrints();
+
+...
+```
